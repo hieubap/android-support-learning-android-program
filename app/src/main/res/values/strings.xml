@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">slap</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">SLAP</string>
+    <string name="nav_header_subtitle">ngohieu1811@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Trang chủ</string>
+    <string name="menu_diem_danh">Điểm danh</string>
+    <string name="menu_ds_lop">Danh sách lớp</string>
+</resources>
