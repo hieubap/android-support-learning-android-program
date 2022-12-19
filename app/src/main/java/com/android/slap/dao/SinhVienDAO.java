@@ -30,7 +30,14 @@ public class SinhVienDAO {
 
         modelMapper.map(doc.getData(),this);
         this.key = Integer.parseInt(doc.getId());
-        this.diemDanh = checks.size();
+
+        int count = 0;
+        for(String k : checks.keySet()){
+            if(checks.get(k)){
+                count++;
+            }
+        }
+        this.diemDanh = count;
     }
 
     public Boolean isCheckIn(int sessionId){

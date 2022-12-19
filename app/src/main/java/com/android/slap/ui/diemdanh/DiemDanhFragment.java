@@ -64,7 +64,7 @@ public class DiemDanhFragment extends Fragment implements SinhVienModelEvent {
             public void run(){
                 sinhVienModel.getData();
             }
-        },0,5000);
+        },0,10000);
 
         binding = FragmentDiemdanhBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

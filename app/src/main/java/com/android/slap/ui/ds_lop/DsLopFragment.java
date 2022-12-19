@@ -24,6 +24,8 @@ import com.android.slap.ui.ds_lop.ui.SinhVienAdapter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class DsLopFragment extends Fragment implements SinhVienModelEvent {
 
@@ -32,11 +34,19 @@ public class DsLopFragment extends Fragment implements SinhVienModelEvent {
     private SinhVienAdapter sinhVienAdapter;
     private GridView gridView;
     private Dialog dialogUpdate;
+    private Timer timerRefresh;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         sinhVienModel = new SinhVienModel(this);
         sinhVienModel.getData();
+        timerRefresh = new Timer();
+        timerRefresh.scheduleAtFixedRate(new TimerTask(){
+            @Override
+            public void run(){
+                sinhVienModel.getData();
+            }
+        },0,10000);
 
         binding = FragmentDsLopBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
