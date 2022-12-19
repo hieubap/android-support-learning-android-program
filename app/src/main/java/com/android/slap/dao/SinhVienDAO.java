@@ -29,7 +29,9 @@ public class SinhVienDAO {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
         modelMapper.map(doc.getData(),this);
-        this.key = Integer.parseInt(doc.getId());
+        if(doc.getId() != null){
+            this.key = Integer.parseInt(doc.getId());
+        }
 
         int count = 0;
         for(String k : checks.keySet()){

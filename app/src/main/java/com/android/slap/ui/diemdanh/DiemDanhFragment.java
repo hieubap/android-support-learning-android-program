@@ -202,13 +202,22 @@ public class DiemDanhFragment extends Fragment implements SinhVienModelEvent {
         dialogUpdate.setCancelable(true);
         dialogUpdate.setContentView(R.layout.input_info_layout);
         dialogUpdate.show();
+
+        SinhVienDAO dao = sinhVienModel.getByKey(finalJ*COLUMN + finalI);
+        EditText fullname = dialogUpdate.findViewById(R.id.fullname);
+        EditText name = dialogUpdate.findViewById(R.id.name);
+        EditText mssv = dialogUpdate.findViewById(R.id.mssv);
+        fullname.setText(dao.fullname);
+        name.setText(dao.name);
+        mssv.setText(dao.mssv);
+
         Button btn = dialogUpdate.findViewById(R.id.save);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText fullname = dialogUpdate.findViewById(R.id.fullname);
-                EditText name = dialogUpdate.findViewById(R.id.name);
-                EditText mssv = dialogUpdate.findViewById(R.id.mssv);
+//                EditText fullname = dialogUpdate.findViewById(R.id.fullname);
+//                EditText name = dialogUpdate.findViewById(R.id.name);
+//                EditText mssv = dialogUpdate.findViewById(R.id.mssv);
 
                 SinhVienDAO dao = sinhVienModel.getByKey(finalJ*COLUMN + finalI);
                 if(!String.valueOf(fullname.getText()).equals("")){

@@ -51,7 +51,9 @@ public class SinhVienModel {
         for(SinhVienDAO sv : listSinhVienDAO){
             if(sv.key == key) return sv;
         }
-        return new SinhVienDAO();
+        SinhVienDAO sv =new SinhVienDAO();
+        sv.key = key;
+        return sv;
     }
 
     public void save(SinhVienDAO sv){

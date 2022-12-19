@@ -21,13 +21,14 @@ import com.android.slap.model.SinhVienModel;
 import com.android.slap.event.SinhVienModelEvent;
 import com.android.slap.ui.ds_lop.ui.SinhVienAdapter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class DsLopFragment extends Fragment implements SinhVienModelEvent {
+public class DsLopFragment extends Fragment implements SinhVienModelEvent, View.OnClickListener {
 
     private FragmentDsLopBinding binding;
     private SinhVienModel sinhVienModel;
@@ -35,6 +36,8 @@ public class DsLopFragment extends Fragment implements SinhVienModelEvent {
     private GridView gridView;
     private Dialog dialogUpdate;
     private Timer timerRefresh;
+    private List<SinhVienDAO> listShow = new ArrayList<>();
+    private EditText searchInput;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +62,10 @@ public class DsLopFragment extends Fragment implements SinhVienModelEvent {
         super.onViewCreated(view, savedInstanceState);
         gridView = binding.dsSvGrid;
 
+        searchInput = binding.searchInput;
+        Button searchBtn = binding.searchBtn;
+        searchBtn.setOnClickListener(this);
+
     }
 
     @Override
@@ -80,8 +87,10 @@ public class DsLopFragment extends Fragment implements SinhVienModelEvent {
 
     @Override
     public void afterGetData(List<SinhVienDAO> list) {
-        sinhVienAdapter = new SinhVienAdapter(getView().getContext(), R.layout.sinh_vien_item, list,this);
-        gridView.setAdapter(sinhVienAdapter);
+        if(String.valueOf(searchInput.getText()).equals("")){
+            sinhVienAdapter = new SinhVienAdapter(getContext(), R.layout.sinh_vien_item, list,this);
+            gridView.setAdapter(sinhVienAdapter);
+        }
     }
 
     @Override
@@ -110,5 +119,21 @@ public class DsLopFragment extends Fragment implements SinhVienModelEvent {
                 sinhVienModel.save(sv);
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+        String s = String.valueOf(searchInput.getText());
+        listShow.clear();
+        for(SinhVienDAO sv : sinhVienModel.listSinhVienDAO){
+            if(sv.fullname != null && sv.fullname.toLowerCase().contains(s.toLowerCase())){
+                listShow.add(sv);
+            }else if(sv.name != null && sv.name.toLowerCase().contains(s.toLowerCase())){
+                listShow.add(sv);
+            }
+        }
+
+        sinhVienAdapter = new SinhVienAdapter(getContext(), R.layout.sinh_vien_item, listShow,this);
+        gridView.setAdapter(sinhVienAdapter);
     }
 }
