@@ -5,14 +5,7 @@ import com.android.slap.dao.SinhVienDAO;
 import java.util.List;
 
 public interface SinhVienModelEvent {
-    void onSuccessIn(SinhVienDAO studentModel);
-
-    void onSuccessOut(SinhVienDAO studentModel);
-
     void afterGetData(List<SinhVienDAO> list);
 
     void afterSave();
-
-    void onTouchItem(SinhVienDAO sv);
-
 }

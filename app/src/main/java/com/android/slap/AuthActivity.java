@@ -19,7 +19,9 @@ import androidx.navigation.ui.NavigationUI;
 import com.android.slap.dao.SinhVienDAO;
 import com.android.slap.databinding.ActivityMainBinding;
 import com.android.slap.databinding.FragmentLoginBinding;
+import com.android.slap.event.SinhVienModelEvent;
 import com.android.slap.model.FSInstance;
+import com.android.slap.model.SinhVienModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -27,15 +29,21 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.PropertyPermission;
 
-public class AuthActivity extends AppCompatActivity {
+public class AuthActivity extends AppCompatActivity implements SinhVienModelEvent {
     private FragmentLoginBinding binding;
     private String adminCode = "";
+    private SinhVienModel sinhVienModel;
+    private Dialog dialogUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sinhVienModel = new SinhVienModel(this);
 
         binding = FragmentLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -85,10 +93,43 @@ public class AuthActivity extends AppCompatActivity {
         btnSv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.THAY_TUAN = false;
-                Intent myIntent = new Intent(AuthActivity.this, MainActivity.class);
-                AuthActivity.this.startActivity(myIntent);
+                dialogUpdate.show();
             }
         });
+
+        dialogUpdate = new Dialog(btnSv.getContext());
+        dialogUpdate.setCancelable(true);
+        dialogUpdate.setContentView(R.layout.input_login_student_layout);
+
+        Button btn = dialogUpdate.findViewById(R.id.login);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sinhVienModel.getData();
+            }
+        });
+    }
+
+    @Override
+    public void afterGetData(List<SinhVienDAO> list) {
+        EditText password = dialogUpdate.findViewById(R.id.password);
+        Map<String,SinhVienDAO> map = new HashMap<>();
+
+        for (SinhVienDAO sv : list){
+            map.put(sv.mssv,sv);
+        }
+        MainActivity.MAP_STUDENT = map;
+        if(map.containsKey(String.valueOf(password.getText()))){
+            MainActivity.USER_ID = String.valueOf(password.getText());
+            Intent myIntent = new Intent(AuthActivity.this, MainActivity.class);
+            AuthActivity.this.startActivity(myIntent);
+            return;
+        }
+        Toast.makeText(getWindow().getContext(), "MSSV không tồn tại",Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void afterSave() {
+
     }
 }

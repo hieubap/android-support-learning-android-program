@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.Button;
 
+import com.android.slap.dao.SinhVienDAO;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -20,11 +21,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.slap.databinding.ActivityMainBinding;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     public static boolean THAY_TUAN = false;
+    public static String USER_ID = "20182514";
+    public static Map<String, SinhVienDAO> MAP_STUDENT = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

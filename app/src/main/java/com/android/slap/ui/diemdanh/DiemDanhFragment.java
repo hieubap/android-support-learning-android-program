@@ -26,17 +26,16 @@ import com.android.slap.MainActivity;
 import com.android.slap.R;
 import com.android.slap.dao.SinhVienDAO;
 import com.android.slap.databinding.FragmentDiemdanhBinding;
-import com.android.slap.model.SinhVienModel;
+import com.android.slap.event.DiemDanhEvent;
+import com.android.slap.model.DiemDanhModel;
 import com.android.slap.event.SinhVienModelEvent;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class DiemDanhFragment extends Fragment implements SinhVienModelEvent {
+public class DiemDanhFragment extends Fragment implements DiemDanhEvent {
     public static int W_BTN = 120;
     public static int H_BTN = 150;
     public static int ROW = 5;
@@ -51,12 +50,12 @@ public class DiemDanhFragment extends Fragment implements SinhVienModelEvent {
     private int sessionId = 2;
 
     private Timer timerRefresh;
-    private SinhVienModel sinhVienModel;
+    private DiemDanhModel sinhVienModel;
     private Dialog dialogUpdate;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        sinhVienModel = new SinhVienModel(this);
+        sinhVienModel = new DiemDanhModel(this);
         sinhVienModel.getData();
         timerRefresh = new Timer();
         timerRefresh.scheduleAtFixedRate(new TimerTask(){
@@ -155,7 +154,7 @@ public class DiemDanhFragment extends Fragment implements SinhVienModelEvent {
                                 }
                             }
                         }else{
-                            showDialog(finalI,finalJ);
+//                            showDialog(finalI,finalJ);
                         }
 
                     }

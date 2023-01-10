@@ -11,7 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.android.slap.R;
 import com.android.slap.dao.SinhVienDAO;
-import com.android.slap.event.SinhVienModelEvent;
+import com.android.slap.event.DiemDanhEvent;
 
 import java.util.List;
 
@@ -20,13 +20,13 @@ public class SinhVienAdapter extends BaseAdapter {
     private Context context;
     private int layout;
     private List<SinhVienDAO> arrayList;
-    private SinhVienModelEvent sinhVienModelEvent;
+    private DiemDanhEvent diemDanhEvent;
 
-    public SinhVienAdapter(Context context, int layout, List<SinhVienDAO> arrayList,SinhVienModelEvent sinhVienModelEvent) {
+    public SinhVienAdapter(Context context, int layout, List<SinhVienDAO> arrayList,DiemDanhEvent sinhVienModelEvent) {
         this.context = context;
         this.layout = layout;
         this.arrayList = arrayList;
-        this.sinhVienModelEvent = sinhVienModelEvent;
+        this.diemDanhEvent = sinhVienModelEvent;
     }
 
     @Override
@@ -61,7 +61,7 @@ public class SinhVienAdapter extends BaseAdapter {
         layoutSvItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sinhVienModelEvent.onTouchItem(sinhVienItem);
+                diemDanhEvent.onTouchItem(sinhVienItem);
             }
         });
 

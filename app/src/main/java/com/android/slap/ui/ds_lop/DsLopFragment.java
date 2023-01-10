@@ -17,21 +17,20 @@ import com.android.slap.MainActivity;
 import com.android.slap.R;
 import com.android.slap.dao.SinhVienDAO;
 import com.android.slap.databinding.FragmentDsLopBinding;
-import com.android.slap.model.SinhVienModel;
+import com.android.slap.event.DiemDanhEvent;
+import com.android.slap.model.DiemDanhModel;
 import com.android.slap.event.SinhVienModelEvent;
 import com.android.slap.ui.ds_lop.ui.SinhVienAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class DsLopFragment extends Fragment implements SinhVienModelEvent, View.OnClickListener {
+public class DsLopFragment extends Fragment implements DiemDanhEvent, View.OnClickListener {
 
     private FragmentDsLopBinding binding;
-    private SinhVienModel sinhVienModel;
+    private DiemDanhModel sinhVienModel;
     private SinhVienAdapter sinhVienAdapter;
     private GridView gridView;
     private Dialog dialogUpdate;
@@ -41,7 +40,7 @@ public class DsLopFragment extends Fragment implements SinhVienModelEvent, View.
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        sinhVienModel = new SinhVienModel(this);
+        sinhVienModel = new DiemDanhModel(this);
         sinhVienModel.getData();
         timerRefresh = new Timer();
         timerRefresh.scheduleAtFixedRate(new TimerTask(){
