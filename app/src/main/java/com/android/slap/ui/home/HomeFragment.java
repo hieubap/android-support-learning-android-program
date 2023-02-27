@@ -10,13 +10,22 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavGraphNavigator;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.slap.AuthActivity;
 import com.android.slap.ChatActivity;
 import com.android.slap.GameActivity;
 import com.android.slap.MainActivity;
+import com.android.slap.QuizCuaThayActivity;
+import com.android.slap.QuizStartActivity;
+import com.android.slap.R;
 import com.android.slap.databinding.FragmentHomeBinding;
+import com.android.slap.ui.diemdanh.DiemDanhFragment;
 
 public class HomeFragment extends Fragment {
 
@@ -31,8 +40,12 @@ public class HomeFragment extends Fragment {
         playGameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent myIntent = new Intent(getActivity(), GameActivity.class);
+                Intent myIntent;
+                if(MainActivity.THAY_TUAN){
+                    myIntent = new Intent(getActivity(), QuizCuaThayActivity.class);
+                }else{
+                    myIntent = new Intent(getActivity(), QuizStartActivity.class);
+                }
                 getActivity().startActivity(myIntent);
             }
         });
@@ -47,6 +60,16 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        Button diemDanhBtn = binding.diemDanhBtn;
+        setupNavigate(diemDanhBtn,R.id.nav_diem_danh);
+        Button dsLopBtn = binding.dsLopBtn;
+        setupNavigate(dsLopBtn,R.id.nav_ds_lop);
+        Button thongTinSvBtn = binding.thongTinSvBtn;
+        setupNavigate(thongTinSvBtn,R.id.nav_thongtin);
+        Button leoNuiBtn = binding.leoNuiBtn;
+        setupNavigate(leoNuiBtn,R.id.nav_game_leo_nui);
+
+
         return root;
     }
 
@@ -54,5 +77,15 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void setupNavigate(Button b, int id){
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = NavHostFragment.findNavController(HomeFragment.this);
+                navController.navigate(id);
+            }
+        });
     }
 }

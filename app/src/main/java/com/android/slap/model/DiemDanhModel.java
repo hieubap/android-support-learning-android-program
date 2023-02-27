@@ -16,7 +16,6 @@ import java.util.List;
 
 public class DiemDanhModel extends SinhVienModel{
     private DiemDanhEvent sinhVienModelEvent;
-    public List<SinhVienDAO> listSinhVienDAO = new ArrayList<>();
 
     public DiemDanhModel(SinhVienModelEvent sinhVienModelEvent){
         super(sinhVienModelEvent);
@@ -41,6 +40,7 @@ public class DiemDanhModel extends SinhVienModel{
     }
 
     private void handleCheck(SinhVienDAO sv, int sessionId, boolean status){
+        System.out.println("onCheck " + status);
         sv.checks.put(""+sessionId, status);
 
         FSInstance.db.collection("student")

@@ -1,4 +1,4 @@
-package com.android.slap.ui.diemdanh;
+package com.android.slap.ui.thongTinSv;
 
 import android.app.Dialog;
 import android.content.res.Resources;
@@ -27,23 +27,23 @@ import com.android.slap.MainActivity;
 import com.android.slap.R;
 import com.android.slap.dao.SinhVienDAO;
 import com.android.slap.databinding.FragmentDiemdanhBinding;
+import com.android.slap.databinding.FragmentThongtinsvBinding;
 import com.android.slap.event.DiemDanhEvent;
 import com.android.slap.model.DiemDanhModel;
-import com.android.slap.event.SinhVienModelEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class DiemDanhFragment extends Fragment implements DiemDanhEvent {
+public class ThongTinSvFragment extends Fragment implements DiemDanhEvent {
     public static int W_BTN = 120;
     public static int H_BTN = 150;
     public static int ROW = 5;
     public static int COLUMN = 6;
     public static int HEIGHT_NAME = 60;
 
-    private FragmentDiemdanhBinding binding;
+    private FragmentThongtinsvBinding binding;
     private List<Boolean> booleans;
     private List<TextView> textViews;
     private List<Button> buttonList;
@@ -66,7 +66,7 @@ public class DiemDanhFragment extends Fragment implements DiemDanhEvent {
             }
         },0,1000);
 
-        binding = FragmentDiemdanhBinding.inflate(inflater, container, false);
+        binding = FragmentThongtinsvBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         booleans = new ArrayList<>();
         textViews = new ArrayList<>();
@@ -153,43 +153,13 @@ public class DiemDanhFragment extends Fragment implements DiemDanhEvent {
                     @Override
                     public void onClick(View view) {
                         if(MainActivity.THAY_TUAN){
-                            if(textViews.get(finalJ*COLUMN + finalI).getText() != null && !textViews.get(finalJ*COLUMN + finalI).getText().equals("")){
-                                if(booleans.get(finalJ*COLUMN + finalI).equals(Boolean.TRUE)){
-                                    sinhVienModel.checkOut(getStudent(finalJ*COLUMN + finalI),sessionId);
-                                }else{
-                                    sinhVienModel.checkIn(getStudent(finalJ*COLUMN + finalI),sessionId);
-                                }
-                            }
-                        }else{
-//                            showDialog(finalI,finalJ);
+                            showDialog(finalI,finalJ);
                         }
-
                     }
                 });
 
             }
         }
-
-        Spinner spinner = binding.spinner;
-
-        String[] s = new String[20];
-        for (int i=0;i<20;i++){
-            s[i] = "Buổi " + (i+1);
-        }
-        ArrayAdapter<String> data = new ArrayAdapter<>(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, s);
-        spinner.setAdapter(data);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                sessionId = i+1;
-                sinhVienModel.getData();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
         return root;
     }
@@ -300,14 +270,8 @@ public class DiemDanhFragment extends Fragment implements DiemDanhEvent {
                 TextView text = textViews.get(entity.key);
                 text.setText(entity.name);
                 text.setTextColor(0xff000000);
-
-                if(entity.isCheckIn(sessionId)){
-                    booleans.set(entity.key,Boolean.TRUE);
-                    renderIn(entity.key%COLUMN,entity.key/COLUMN);
-                }else{
-                    booleans.set(entity.key,Boolean.FALSE);
-                    renderOut(entity.key%COLUMN,entity.key/COLUMN);
-                }
+                booleans.set(entity.key,Boolean.TRUE);
+                renderIn(entity.key%COLUMN,entity.key/COLUMN);
         }
     }
 

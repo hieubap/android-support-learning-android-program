@@ -16,6 +16,7 @@ public class SinhVienDAO {
     public Double giuaKy = 0.0;
     public Double cuoiKy = 0.0;
     public Integer diemDanh;
+    public Integer diemQuiz = 0;
     public Map<String,Boolean> checks = new HashMap<>();
 
     public SinhVienDAO(){

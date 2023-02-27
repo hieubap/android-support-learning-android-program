@@ -26,6 +26,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -108,6 +111,42 @@ public class AuthActivity extends AppCompatActivity implements SinhVienModelEven
                 sinhVienModel.getData();
             }
         });
+
+//        QuizStartActivity.myRef.child("quiz").child("0002").addListenerForSingleValueEvent(
+//                new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        System.out.println("has child");
+////                        snapshot.child("").child("pass").getValue();
+//                        for(DataSnapshot d : snapshot.getChildren()){
+//                            System.out.println("has child " + d.getKey());
+//                            FSInstance.db.collection("quiz1")
+//                                    .document(d.getKey())
+//                                    .set(new HashMap<String,Object>(){{
+//                                        put("A",d.child("A").getValue());
+//                                        put("B",d.child("B").getValue());
+//                                        put("C",d.child("C").getValue());
+//                                        put("D",d.child("D").getValue());
+//                                        put("answer",d.child("answer").getValue());
+//                                        put("question",d.child("question").getValue());
+//                                    }})
+//                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<Void> task) {
+//
+//                                        }
+//                                    });
+//
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                }
+//        );
     }
 
     @Override
@@ -120,6 +159,7 @@ public class AuthActivity extends AppCompatActivity implements SinhVienModelEven
         }
         MainActivity.MAP_STUDENT = map;
         if(map.containsKey(String.valueOf(password.getText()))){
+            MainActivity.THAY_TUAN = false;
             MainActivity.USER_ID = String.valueOf(password.getText());
             Intent myIntent = new Intent(AuthActivity.this, MainActivity.class);
             AuthActivity.this.startActivity(myIntent);

@@ -17,17 +17,18 @@
 
     <include layout="@layout/content_main" />
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:titleTextColor="@color/white"
-        android:backgroundTint="@color/white"
-        app:subtitleTextColor="@color/white"
-        android:foregroundTint="@color/white"
-        android:theme="@style/ThemeToolbar"
-        android:background="@color/transparent"
-        />
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/toolbar"-->
+
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?attr/actionBarSize"-->
+<!--        app:titleTextColor="@color/white"-->
+<!--        android:backgroundTint="@color/white"-->
+<!--        app:subtitleTextColor="@color/white"-->
+<!--        android:foregroundTint="@color/white"-->
+<!--        android:theme="@style/ThemeToolbar"-->
+<!--        android:background="@color/transparent"-->
+<!--        />-->
 
 <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
 <!--        android:id="@+id/fab"-->

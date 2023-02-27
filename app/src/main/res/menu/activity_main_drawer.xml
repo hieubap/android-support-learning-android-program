@@ -6,15 +6,23 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/list"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_diem_danh"
             android:icon="@drawable/list"
             android:title="@string/menu_diem_danh" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/puzzle"
+            android:icon="@drawable/list"
             android:title="@string/menu_ds_lop" />
+        <item
+            android:id="@+id/nav_thongtin"
+            android:icon="@drawable/list"
+            android:title="@string/th_ng_tin_sinh_vi_n" />
+        <item
+            android:id="@+id/nav_game"
+            android:icon="@drawable/list"
+            android:title="Game leo núi" />
     </group>
 </menu>
