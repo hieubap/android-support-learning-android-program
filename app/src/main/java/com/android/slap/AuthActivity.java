@@ -47,6 +47,7 @@ public class AuthActivity extends AppCompatActivity implements SinhVienModelEven
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sinhVienModel = new SinhVienModel(this);
+        sinhVienModel.getData();
 
         binding = FragmentLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -108,7 +109,16 @@ public class AuthActivity extends AppCompatActivity implements SinhVienModelEven
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sinhVienModel.getData();
+                EditText password = dialogUpdate.findViewById(R.id.password);
+
+                if(MainActivity.MAP_STUDENT.containsKey(String.valueOf(password.getText()))){
+                    MainActivity.THAY_TUAN = false;
+                    MainActivity.USER_ID = String.valueOf(password.getText());
+                    Intent myIntent = new Intent(AuthActivity.this, MainActivity.class);
+                    AuthActivity.this.startActivity(myIntent);
+                    return;
+                }
+                Toast.makeText(getWindow().getContext(), "MSSV không tồn tại",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -151,21 +161,13 @@ public class AuthActivity extends AppCompatActivity implements SinhVienModelEven
 
     @Override
     public void afterGetData(List<SinhVienDAO> list) {
-        EditText password = dialogUpdate.findViewById(R.id.password);
         Map<String,SinhVienDAO> map = new HashMap<>();
 
         for (SinhVienDAO sv : list){
             map.put(sv.mssv,sv);
         }
         MainActivity.MAP_STUDENT = map;
-        if(map.containsKey(String.valueOf(password.getText()))){
-            MainActivity.THAY_TUAN = false;
-            MainActivity.USER_ID = String.valueOf(password.getText());
-            Intent myIntent = new Intent(AuthActivity.this, MainActivity.class);
-            AuthActivity.this.startActivity(myIntent);
-            return;
-        }
-        Toast.makeText(getWindow().getContext(), "MSSV không tồn tại",Toast.LENGTH_LONG).show();
+
     }
 
     @Override
