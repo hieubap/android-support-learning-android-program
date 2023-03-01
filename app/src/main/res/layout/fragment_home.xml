@@ -17,24 +17,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button"
-        android:layout_width="171dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="44dp"
-        android:background="@drawable/gradient_yellow"
-        android:text="Ôn tập"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/chat_btn"
         android:layout_width="171dp"
         android:layout_height="150dp"
-        android:layout_marginTop="72dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/gradient_green"
         android:text="Chat"
@@ -42,7 +27,7 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button" />
+        tools:layout_editor_absoluteY="172dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/play_game_btn"
@@ -78,55 +63,39 @@
         android:layout_width="171dp"
         android:layout_height="150dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/gradient_green"
+        android:background="@drawable/gradient_violet"
         android:text="Danh sách lớp"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/diem_danh_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/diem_danh_btn"
+        tools:layout_editor_absoluteX="28dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/leo_nui_btn"
         android:layout_width="171dp"
         android:layout_height="150dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/gradient_violet"
+        android:background="@drawable/gradient_green"
         android:text="Game leo núi"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/ds_lop_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/ds_lop_btn"
+        tools:layout_editor_absoluteX="28dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/diem_danh_btn"
         android:layout_width="171dp"
         android:layout_height="150dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/gradient_violet"
+        android:layout_marginTop="84dp"
+        android:background="@drawable/gradient_yellow"
         android:text="Điểm danh"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
-
-    <ImageView
-        android:id="@+id/icon1"
-        android:layout_width="66dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:src="@drawable/books"
-        android:translationZ="10dp"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toTopOf="@+id/button" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="28dp" />
 
     <ImageView
         android:id="@+id/icon2"
