@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-    public static boolean THAY_TUAN = true;
+    public static boolean THAY_TUAN = false;
     public static String USER_ID = "20182514";
     public static Map<String, SinhVienDAO> MAP_STUDENT = new HashMap<>();
 
