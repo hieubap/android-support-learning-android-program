@@ -83,6 +83,7 @@ public class AuthActivity extends AppCompatActivity implements SinhVienModelEven
 
                         if((String.valueOf(password.getText())).equals(adminCode)){
                             MainActivity.THAY_TUAN = true;
+                            MainActivity.USER_ID = "123456";
                             Intent myIntent = new Intent(AuthActivity.this, MainActivity.class);
                             AuthActivity.this.startActivity(myIntent);
                         }else{

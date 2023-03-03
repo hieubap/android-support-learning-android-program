@@ -69,16 +69,8 @@ public class HomeFragment extends Fragment {
         Button leoNuiBtn = binding.leoNuiBtn;
         setupNavigate(leoNuiBtn,R.id.nav_game_leo_nui);
 
-
         return root;
     }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
-
     private void setupNavigate(Button b, int id){
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,5 +79,11 @@ public class HomeFragment extends Fragment {
                 navController.navigate(id);
             }
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

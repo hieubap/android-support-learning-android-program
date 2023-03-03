@@ -55,6 +55,9 @@ public class ChatAdapter extends BaseAdapter {
             name = "";
         }else{
             view = inflater.inflate(R.layout.chat_item_receive,null);
+            if(chatItem.userId.equals("123456")){
+                name = "THẦY: ";
+            }
         }
 
 
