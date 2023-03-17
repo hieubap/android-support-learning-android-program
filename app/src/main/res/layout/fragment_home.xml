@@ -172,8 +172,8 @@
 
     <TextView
         android:id="@+id/textView9"
-        android:layout_width="265dp"
-        android:layout_height="66dp"
+        android:layout_width="286dp"
+        android:layout_height="89dp"
         android:layout_marginBottom="16dp"
         android:text="Danh sách thành viên:\n1. Võ Kiều Trinh - 20182833\n2. Ngô Quang Hiếu - 20182514"
         android:textSize="18sp"
