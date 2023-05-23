@@ -32,12 +32,10 @@ public class ChatActivity extends AppCompatActivity implements ChatModelEvent {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         fragmentChatBinding = FragmentChatBinding.inflate(getLayoutInflater());
         setContentView(fragmentChatBinding.getRoot());
 
@@ -60,7 +58,7 @@ public class ChatActivity extends AppCompatActivity implements ChatModelEvent {
             public void run(){
                 chatModel.getData();
             }
-        },0,500);
+        }, 0, 500);
 
     }
 

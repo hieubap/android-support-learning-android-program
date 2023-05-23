@@ -16,28 +16,20 @@ import android.util.Log;
 import androidx.core.app.ActivityCompat;
 
 public final class GPSTracker implements LocationListener {
-
     private final Context mContext;
-
     // flag for GPS status
     public boolean isGPSEnabled = false;
-
     // flag for network status
     boolean isNetworkEnabled = false;
-
     // flag for GPS status
     boolean canGetLocation = false;
-
     Location location; // location
     double latitude; // latitude
     double longitude; // longitude
-
     // The minimum distance to change Updates in meters
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 1; // 10 meters
-
     // The minimum time between updates in milliseconds
     private static final long MIN_TIME_BW_UPDATES = 1; // 1 minute
-
     // Declaring a Location Manager
     protected LocationManager locationManager;
 
@@ -45,7 +37,6 @@ public final class GPSTracker implements LocationListener {
         this.mContext = context;
         getLocation();
     }
-
     /**
      * Function to get the user's current location
      *

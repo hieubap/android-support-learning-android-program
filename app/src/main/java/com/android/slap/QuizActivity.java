@@ -226,7 +226,6 @@ public class QuizActivity extends AppCompatActivity implements ValueEventListene
 //            }
         }
     }
-
     @Override
     public void onBackPressed() {
         QuizStartActivity.myRef.removeEventListener(this);
@@ -234,7 +233,6 @@ public class QuizActivity extends AppCompatActivity implements ValueEventListene
         keyQuestion = "0";
         super.onBackPressed();
     }
-
     @Override
     public void onCancelled(@NonNull DatabaseError error) {
 

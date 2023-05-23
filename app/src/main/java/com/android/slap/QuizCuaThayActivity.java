@@ -52,11 +52,9 @@ public class QuizCuaThayActivity extends AppCompatActivity implements ValueEvent
     public List<Score> listScore = new ArrayList<>();
     public List<Map<String,Object>> listAnswer = new ArrayList<>();
     public boolean loadQuiz = false, loadAnswer = false, loadStudent = false;
-
     ListView listViewRank;
     ScoreAdapter adapter;
     ArrayList<Score> arrayList;
-
     public static int current = 0;
     public TextView numText,questText,correctText, ansText;
     public static String dapAn = "Đáp án", questStr = "Câu hỏi";
@@ -76,7 +74,6 @@ public class QuizCuaThayActivity extends AppCompatActivity implements ValueEvent
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_quiz_cua_thay_tuan);
         myRef.child("flag").addValueEventListener(this);
 
@@ -95,8 +92,6 @@ public class QuizCuaThayActivity extends AppCompatActivity implements ValueEvent
         questText = findViewById(R.id.question_play_text);
         correctText = findViewById(R.id.correct_text);
         ansText = findViewById(R.id.answer_text);
-
-
         Button buttonPlay = findViewById(R.id.btn_start);
         buttonPlay.setOnClickListener(new View.OnClickListener() {
             @Override

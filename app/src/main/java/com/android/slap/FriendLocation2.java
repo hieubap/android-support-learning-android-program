@@ -21,10 +21,7 @@ public class FriendLocation2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_location2);
-
-
         GPSTracker mGPS = new GPSTracker(this);
-
         TextView text = findViewById(R.id.text_location);
         if(mGPS.canGetLocation ){
             mGPS.getLocation();
@@ -34,8 +31,6 @@ public class FriendLocation2 extends AppCompatActivity {
             System.out.println("Unable");
         }
 
-
-//
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -58,7 +53,6 @@ public class FriendLocation2 extends AppCompatActivity {
                         InputStreamReader responseBodyReader =
                                 new InputStreamReader(responseBody, "UTF-8");
                         JsonReader jsonReader = new JsonReader(responseBodyReader);
-
                         jsonReader.beginObject(); // Start processing the JSON object
                         while (jsonReader.hasNext()) { // Loop through all keys
                             String key = jsonReader.nextName(); //
@@ -83,7 +77,6 @@ public class FriendLocation2 extends AppCompatActivity {
                         }
                         jsonReader.close();
                         myConnection.disconnect();
-
                         // Further processing here
                     } else {
                         System.out.println("Error");

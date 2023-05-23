@@ -13,7 +13,6 @@ public class GameActivity extends AppCompatActivity {
     public static int WIDTH = 720;
     public static int HEIGHT = 1280;
     public Control control;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

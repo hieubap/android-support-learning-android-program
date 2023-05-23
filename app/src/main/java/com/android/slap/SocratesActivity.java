@@ -24,7 +24,6 @@ public class SocratesActivity extends AppCompatActivity {
             }
         },0,1000);
     }
-
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 

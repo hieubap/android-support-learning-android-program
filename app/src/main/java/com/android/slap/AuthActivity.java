@@ -48,10 +48,8 @@ public class AuthActivity extends AppCompatActivity implements SinhVienModelEven
         super.onCreate(savedInstanceState);
         sinhVienModel = new SinhVienModel(this);
         sinhVienModel.getData();
-
         binding = FragmentLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         FSInstance.db.collection("admin").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -70,7 +68,6 @@ public class AuthActivity extends AppCompatActivity implements SinhVienModelEven
         btnThay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Dialog dialogUpdate = new Dialog(view.getContext());
                 dialogUpdate.setCancelable(true);
                 dialogUpdate.setContentView(R.layout.input_login_layout);
@@ -80,8 +77,6 @@ public class AuthActivity extends AppCompatActivity implements SinhVienModelEven
                     @Override
                     public void onClick(View view) {
                         EditText password = dialogUpdate.findViewById(R.id.password);
-
-
                         if((String.valueOf(password.getText())).equals(adminCode)){
                             MainActivity.THAY = true;
                             MainActivity.USER_ID = "123456";
@@ -112,7 +107,6 @@ public class AuthActivity extends AppCompatActivity implements SinhVienModelEven
             @Override
             public void onClick(View view) {
                 EditText password = dialogUpdate.findViewById(R.id.password);
-
                 if(MainActivity.MAP_STUDENT.containsKey(String.valueOf(password.getText()))){
                     MainActivity.THAY = false;
                     MainActivity.USER_ID = String.valueOf(password.getText());
@@ -169,7 +163,6 @@ public class AuthActivity extends AppCompatActivity implements SinhVienModelEven
             map.put(sv.mssv,sv);
         }
         MainActivity.MAP_STUDENT = map;
-
     }
 
     @Override

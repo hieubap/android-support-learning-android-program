@@ -84,7 +84,6 @@ public class QuizStartActivity extends AppCompatActivity implements ValueEventLi
         loadAnswer();
         System.out.println("onCreate =========");
     }
-
     void onChangeData(){
         ArrayList<Score> arrayList = new ArrayList<>();
 
