@@ -36,29 +36,29 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        Button playGameBtn = binding.playGameBtn;
-        playGameBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent;
-                if(MainActivity.THAY_TUAN){
-                    myIntent = new Intent(getActivity(), QuizCuaThayActivity.class);
-                }else{
-                    myIntent = new Intent(getActivity(), QuizStartActivity.class);
-                }
-                getActivity().startActivity(myIntent);
-            }
-        });
+//        Button playGameBtn = binding.playGameBtn;
+//        playGameBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent myIntent;
+//                if(MainActivity.THAY){
+//                    myIntent = new Intent(getActivity(), QuizCuaThayActivity.class);
+//                }else{
+//                    myIntent = new Intent(getActivity(), QuizStartActivity.class);
+//                }
+//                getActivity().startActivity(myIntent);
+//            }
+//        });
 
-        Button chatBtn = binding.chatBtn;
-        chatBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent myIntent = new Intent(getActivity(), ChatActivity.class);
-                getActivity().startActivity(myIntent);
-            }
-        });
+//        Button chatBtn = binding.chatBtn;
+//        chatBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent myIntent = new Intent(getActivity(), ChatActivity.class);
+//                getActivity().startActivity(myIntent);
+//            }
+//        });
 
         Button diemDanhBtn = binding.diemDanhBtn;
         setupNavigate(diemDanhBtn,R.id.nav_diem_danh);
@@ -66,8 +66,8 @@ public class HomeFragment extends Fragment {
         setupNavigate(dsLopBtn,R.id.nav_ds_lop);
         Button thongTinSvBtn = binding.thongTinSvBtn;
         setupNavigate(thongTinSvBtn,R.id.nav_thongtin);
-        Button leoNuiBtn = binding.leoNuiBtn;
-        setupNavigate(leoNuiBtn,R.id.nav_game_leo_nui);
+//        Button leoNuiBtn = binding.leoNuiBtn;
+//        setupNavigate(leoNuiBtn,R.id.nav_game_leo_nui);
 
         return root;
     }

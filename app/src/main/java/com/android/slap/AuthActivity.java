@@ -83,7 +83,7 @@ public class AuthActivity extends AppCompatActivity implements SinhVienModelEven
 
 
                         if((String.valueOf(password.getText())).equals(adminCode)){
-                            MainActivity.THAY_TUAN = true;
+                            MainActivity.THAY = true;
                             MainActivity.USER_ID = "123456";
                             Intent myIntent = new Intent(AuthActivity.this, MainActivity.class);
                             AuthActivity.this.startActivity(myIntent);
@@ -114,7 +114,7 @@ public class AuthActivity extends AppCompatActivity implements SinhVienModelEven
                 EditText password = dialogUpdate.findViewById(R.id.password);
 
                 if(MainActivity.MAP_STUDENT.containsKey(String.valueOf(password.getText()))){
-                    MainActivity.THAY_TUAN = false;
+                    MainActivity.THAY = false;
                     MainActivity.USER_ID = String.valueOf(password.getText());
                     Intent myIntent = new Intent(AuthActivity.this, MainActivity.class);
                     AuthActivity.this.startActivity(myIntent);

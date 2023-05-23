@@ -172,7 +172,7 @@ public class ClimbingGameFragment extends Fragment implements DiemDanhEvent {
                     btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            if(MainActivity.THAY_TUAN){
+                            if(MainActivity.THAY){
                                 if(textViews.get(finalJ*COLUMN + finalI).getText() != null && !textViews.get(finalJ*COLUMN + finalI).getText().equals("")){
                                     if(booleans.get(finalJ*COLUMN + finalI).equals(Boolean.TRUE)){
                                         sinhVienModel.checkOut(getStudent(finalJ*COLUMN + finalI),sessionId);

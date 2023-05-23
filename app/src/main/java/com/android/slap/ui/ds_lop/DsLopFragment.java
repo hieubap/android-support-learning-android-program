@@ -100,7 +100,7 @@ public class DsLopFragment extends Fragment implements DiemDanhEvent, View.OnCli
 
     @Override
     public void onTouchItem(SinhVienDAO sv) {
-        if(!MainActivity.THAY_TUAN) return;
+        if(!MainActivity.THAY) return;
         dialogUpdate = new Dialog(getContext());
         dialogUpdate.setCancelable(true);
         dialogUpdate.setContentView(R.layout.input_point_layout);

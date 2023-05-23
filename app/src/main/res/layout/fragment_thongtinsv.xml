@@ -27,7 +27,7 @@
             android:layout_marginStart="132dp"
             android:layout_marginTop="56dp"
             android:layout_marginEnd="132dp"
-            android:text="Sơ đồ lớp ET4710 - 137364"
+            android:text="Sơ đồ lớp ET4710 - 142097"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.51"

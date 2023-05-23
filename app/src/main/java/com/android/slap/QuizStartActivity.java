@@ -127,7 +127,7 @@ public class QuizStartActivity extends AppCompatActivity implements ValueEventLi
 
     @Override
     public void onDataChange(@NonNull DataSnapshot snapshot) {
-        if(!MainActivity.THAY_TUAN && !isAnswer
+        if(!MainActivity.THAY && !isAnswer
                 && snapshot.hasChild("status")
                 && Objects.equals((String) snapshot.child("status").getValue(), "start")){
             Intent intent = new Intent(this, QuizActivity.class);// New activity

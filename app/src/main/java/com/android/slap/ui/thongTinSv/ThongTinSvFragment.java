@@ -152,7 +152,7 @@ public class ThongTinSvFragment extends Fragment implements DiemDanhEvent {
                 btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(MainActivity.THAY_TUAN){
+                        if(MainActivity.THAY){
                             showDialog(finalI,finalJ);
                         }
                     }
