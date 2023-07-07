@@ -1,90 +1,124 @@
 package com.android.slap.ui.diemdanh;
 
+import android.os.AsyncTask;
 import android.util.JsonReader;
-import android.util.Log;
 
+import java.io.DataOutputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import org.apache.commons.io.FileUtils;
 
 public class APIRequest {
-    public static String apiGet = "http://127.0.0.1:5000/get";
-    public static String apiUpload = "http://127.0.0.1:5000/file-upload";
+    public APIRequest() {}
 
-    public APIRequest(){}
-
-    public Map<String,Object> getBody(HttpsURLConnection http) throws Exception{
-        InputStreamReader reader = new InputStreamReader(http.getInputStream(),"UTF-8");
-        JsonReader jsonReader = new JsonReader(reader);
-
-        Map<String,Object> output = new HashMap<>();
-        jsonReader.beginObject(); // Start processing the JSON object
-        while (jsonReader.hasNext()) { // Loop through all keys
-            String key = jsonReader.nextName(); // Fetch the next key
-            output.put(key, jsonReader.nextString());
-//            if (key.equals("organization_url")) { // Check if desired key
-//                String value = jsonReader.nextString();
-//
-//                // Do something with the value
-//                // ...
-//
-//                break; // Break out of the loop
-//            } else {
-//                jsonReader.skipValue(); // Skip values of other keys
-//            }
-        }
-        return output;
-    }
     public void callGet(){
-        try {
-//            URL url = new URL(apiGet);
-//            HttpsURLConnection http = (HttpsURLConnection) url.openConnection();
-//            if (http.getResponseCode() == 200) {
-//                Map<String, Object> m = getBody(http);
-//
-//            } else {
-//
-//            }
-            // Tạo request lên server.
-            Request request = new Request.Builder()
-                    .url("https://api.github.com/users")
-                    .build();
-
-            // Thực thi request.
-            client.newCall(request).enqueue(new Callback() {
+        try{
+            AsyncTask.execute(new Runnable() {
                 @Override
-                public void onFailure(Call call, IOException e) {
-                    Log.e("Error", "Network Error");
-                }
-
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-
-                    // Lấy thông tin JSON trả về. Bạn có thể log lại biến json này để xem nó như thế nào.
-                    String json = response.body().string();
-                    final List<User> users = jsonAdapter.fromJson(json);
-
-                    // Cho hiển thị lên RecyclerView.
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            rvUsers.setAdapter(new UserAdapter(users, MainActivity.this));
+                public void run() {
+                    // Create URL
+                    try{
+                        URL githubEndpoint = new URL("https://firebase.googleapis.com/v1alpha/projects/-/apps/1:592900011890:web:6c46b518a66d5656548feb/webConfig");
+// Create connection
+                        HttpsURLConnection myConnection =
+                                (HttpsURLConnection) githubEndpoint.openConnection();
+                        myConnection.setRequestProperty("X-Goog-Api-Key", "AIzaSyD1Dr_T9bFDX2Vc7BK1s-uEeVxskk_qtvA");
+                        if (myConnection.getResponseCode() == 200) {
+                            InputStream responseBody = myConnection.getInputStream();
+                            InputStreamReader responseBodyReader =
+                                    new InputStreamReader(responseBody, "UTF-8");
+                            JsonReader jsonReader = new JsonReader(responseBodyReader);
+                            jsonReader.beginObject(); // Start processing the JSON object
+                            Map<String,Object> map = new HashMap<>();
+                            while (jsonReader.hasNext()) { // Loop through all keys
+                                String key = jsonReader.nextName(); // Fetch the next key
+                                map.put(key,jsonReader.nextString());
+                            }
+                            map.size();
+                            // Success
+                            // Further processing here
+                        } else {
+                            // Error handling code goes here
                         }
-                    });
+                    }catch(Exception e){
+                        int i = 0;
+                    }
+
                 }
             });
         }catch(Exception e){
-            int x = 0;
+
         }
+
     }
 
-    public void callUpload(){
+    public void callPost(File file){
+        try{
+            AsyncTask.execute(new Runnable() {
+                @Override
+                public void run() {
+                    // Create URL
+                    try{
+                        URL url = new URL("");
+                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+//                        String auth = "Bearer " + oauthToken;
+//                        connection.setRequestProperty("Authorization", basicAuth);
+
+                        String boundary = UUID.randomUUID().toString();
+                        connection.setRequestMethod("POST");
+                        connection.setDoOutput(true);
+                        connection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+
+                        DataOutputStream request = new DataOutputStream(connection.getOutputStream());
+
+                        request.writeBytes("--" + boundary + "\r\n");
+                        request.writeBytes("Content-Disposition: form-data; name=\"description\"\r\n\r\n");
+                        request.writeBytes("" + "\r\n");
+
+                        request.writeBytes("--" + boundary + "\r\n");
+                        request.writeBytes("Content-Disposition: form-data; name=\"file\"; filename=\"" + "" + "\"\r\n\r\n");
+                        request.write(FileUtils.readFileToByteArray(file));
+                        request.writeBytes("\r\n");
+
+                        request.writeBytes("--" + boundary + "--\r\n");
+                        request.flush();
+
+                        if (connection.getResponseCode() == 200) {
+                            InputStream responseBody = connection.getInputStream();
+                            InputStreamReader responseBodyReader =
+                                    new InputStreamReader(responseBody, "UTF-8");
+                            JsonReader jsonReader = new JsonReader(responseBodyReader);
+                            jsonReader.beginObject(); // Start processing the JSON object
+                            Map<String,Object> map = new HashMap<>();
+                            while (jsonReader.hasNext()) { // Loop through all keys
+                                String key = jsonReader.nextName(); // Fetch the next key
+                                map.put(key,jsonReader.nextString());
+                            }
+                            map.size();
+                            // Success
+                            // Further processing here
+                        } else {
+                            // Error handling code goes here
+                        }
+                    }catch(Exception e){
+                        int i = 0;
+                    }
+
+                }
+            });
+        }catch(Exception e){
+
+        }
 
     }
 }

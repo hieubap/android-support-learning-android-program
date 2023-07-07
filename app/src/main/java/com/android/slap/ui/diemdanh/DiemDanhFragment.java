@@ -1,9 +1,11 @@
 package com.android.slap.ui.diemdanh;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.dynamicanimation.animation.DynamicAnimation;
@@ -189,6 +195,36 @@ public class DiemDanhFragment extends Fragment implements DiemDanhEvent {
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
+        });
+
+        // initializing variables on below line.
+        Button pickImageBtn = binding.buttonPicker;
+        ImageView imageIV = binding.imagePicker;
+
+        ActivityResultLauncher<Intent> activityResultLaunch = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getData().getData() != null) {
+                            imageIV.setImageURI(result.getData().getData());
+                        } else if(result.getResultCode() == 321) {
+
+                        }
+                    }
+                });
+        // adding click listener for button on below line.
+        pickImageBtn.setOnClickListener(new View.OnClickListener (){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                activityResultLaunch.launch(intent);
+//                startActivityForResult(intent,1);
+            }
+            // calling intent on below line.
+//
+            // starting activity on below line.
+//        startActivityForResult(intent, 1);
         });
 
         return root;
