@@ -20,6 +20,7 @@ import com.android.slap.databinding.FragmentLoginBinding;
 import com.android.slap.event.SinhVienModelEvent;
 import com.android.slap.model.FSInstance;
 import com.android.slap.model.SinhVienModel;
+import com.android.slap.ui.diemdanh.APIRequest;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -46,6 +47,8 @@ public class AuthActivity
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    APIRequest api = new APIRequest();
+    api.callGet();
     sinhVienModel = new SinhVienModel(this);
     sinhVienModel.getData();
     binding = FragmentLoginBinding.inflate(getLayoutInflater());
