@@ -3,6 +3,7 @@ package com.android.slap.ui.diemdanh;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -37,6 +38,7 @@ import com.android.slap.event.DiemDanhEvent;
 import com.android.slap.model.DiemDanhModel;
 import com.android.slap.event.SinhVienModelEvent;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;

@@ -5,6 +5,7 @@ import android.util.JsonReader;
 
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -61,6 +62,9 @@ public class APIRequest {
 
     }
 
+    String boundary = "-------------" + System.currentTimeMillis();
+    String lineEnd = "\r\n";
+    String twoHyphens = "--";
     public void callPost(File file){
         try{
             AsyncTask.execute(new Runnable() {
@@ -71,27 +75,31 @@ public class APIRequest {
                         URL url = new URL("");
                         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-//                        String auth = "Bearer " + oauthToken;
-//                        connection.setRequestProperty("Authorization", basicAuth);
-
-                        String boundary = UUID.randomUUID().toString();
-                        connection.setRequestMethod("POST");
                         connection.setDoOutput(true);
-                        connection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+                        connection.setRequestMethod("POST");
+                        connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
 
-                        DataOutputStream request = new DataOutputStream(connection.getOutputStream());
+                        // Set request headers or parameters if needed
+                        // connection.setRequestProperty("HeaderKey", "HeaderValue");
 
-                        request.writeBytes("--" + boundary + "\r\n");
-                        request.writeBytes("Content-Disposition: form-data; name=\"description\"\r\n\r\n");
-                        request.writeBytes("" + "\r\n");
+                        DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream());
 
-                        request.writeBytes("--" + boundary + "\r\n");
-                        request.writeBytes("Content-Disposition: form-data; name=\"file\"; filename=\"" + "" + "\"\r\n\r\n");
-                        request.write(FileUtils.readFileToByteArray(file));
-                        request.writeBytes("\r\n");
+                        outputStream.writeBytes(twoHyphens + boundary + lineEnd);
+                        outputStream.writeBytes("Content-Disposition: form-data; name=\"file\"; filename=\"" + file.getName() + "\"" + lineEnd);
+                        outputStream.writeBytes(lineEnd);
 
-                        request.writeBytes("--" + boundary + "--\r\n");
-                        request.flush();
+                        FileInputStream fileInputStream = new FileInputStream(file);
+                        byte[] buffer = new byte[4096];
+                        int bytesRead;
+                        while ((bytesRead = fileInputStream.read(buffer)) != -1) {
+                            outputStream.write(buffer, 0, bytesRead);
+                        }
+
+                        outputStream.writeBytes(lineEnd);
+                        outputStream.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+                        outputStream.flush();
+                        outputStream.close();
+
 
                         if (connection.getResponseCode() == 200) {
                             InputStream responseBody = connection.getInputStream();
