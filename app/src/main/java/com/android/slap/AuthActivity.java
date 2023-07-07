@@ -2,12 +2,20 @@ package com.android.slap;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -22,6 +30,7 @@ import com.android.slap.databinding.FragmentLoginBinding;
 import com.android.slap.event.SinhVienModelEvent;
 import com.android.slap.model.FSInstance;
 import com.android.slap.model.SinhVienModel;
+import com.android.slap.ui.diemdanh.ApiRequest;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
@@ -46,6 +55,10 @@ public class AuthActivity extends AppCompatActivity implements SinhVienModelEven
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ApiRequest api = new ApiRequest();
+        api.callGet();
+
+
         sinhVienModel = new SinhVienModel(this);
         sinhVienModel.getData();
 
@@ -64,6 +77,36 @@ public class AuthActivity extends AppCompatActivity implements SinhVienModelEven
                     }
                 }
             }
+        });
+
+        // initializing variables on below line.
+        Button pickImageBtn = binding.buttonPicker;
+        ImageView imageIV = binding.imgRender;
+
+        ActivityResultLauncher<Intent> activityResultLaunch = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getData().getData() != null) {
+                            imageIV.setImageURI(result.getData().getData());
+                        } else if(result.getResultCode() == 321) {
+
+                        }
+                    }
+                });
+        // adding click listener for button on below line.
+        pickImageBtn.setOnClickListener(new View.OnClickListener (){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                activityResultLaunch.launch(intent);
+//                startActivityForResult(intent,1);
+            }
+            // calling intent on below line.
+//
+            // starting activity on below line.
+//        startActivityForResult(intent, 1);
         });
 
         Button btnThay = binding.btnThay;
@@ -174,5 +217,14 @@ public class AuthActivity extends AppCompatActivity implements SinhVienModelEven
     @Override
     public void afterSave() {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 200 && resultCode == RESULT_OK && data != null) {
+            Uri selectedImage = data.getData();
+            // Do something with the selected image URI, such as displaying it in an ImageView
+        }
     }
 }
